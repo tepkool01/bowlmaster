@@ -8,23 +8,23 @@ public class Ball : MonoBehaviour {
     private Rigidbody rigidBody;
     private AudioSource audioSource;
 
+    public bool inPlay;
+
 	// Use this for initialization
 	void Start ()
     {
         rigidBody = this.GetComponent<Rigidbody>();
-        audioSource = this.GetComponent<AudioSource>();
-
-        Launch();
+        this.rigidBody.useGravity = false;
     }
 
-    public void Launch()
+    public void Launch (Vector3 velocity)
     {
-        rigidBody.velocity = launchSpeed;
+        inPlay = true;
+
+        this.rigidBody.useGravity = true;
+        rigidBody.velocity = velocity;
+
+        audioSource = this.GetComponent<AudioSource>();
         audioSource.Play();
     }
-
-    // Update is called once per frame
-    void Update () {
-
-	}
 }
